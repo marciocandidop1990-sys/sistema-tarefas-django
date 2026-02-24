@@ -1,0 +1,43 @@
+{% extends 'tarefas/base.html' %}
+
+{% block title %}Minhas Tarefas{% endblock %}
+
+{% block content %}
+
+<h2>Minhas Tarefas</h2>
+
+<a href="{% url 'criar_tarefa' %}" class="btn">
+    + Nova Tarefa
+</a>
+
+<ul>
+    {% for tarefa in tarefas %}
+        <li>
+            <div class="card">
+                <strong>{{ tarefa.titulo }}</strong>
+
+                {% if tarefa.concluida %}
+                    ✅ Concluída
+                {% else %}
+                    ⏳ Pendente
+                {% endif %}
+
+                <br>
+
+                <a href="{% url 'editar_tarefa' tarefa.id %}">
+                    Editar
+                </a>
+
+                <a href="{% url 'deletar_tarefa' tarefa.id %}" 
+                   class="delete"
+                   onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')">
+                   Deletar
+                </a>
+            </div>
+        </li>
+    {% empty %}
+        <li>Nenhuma tarefa cadastrada.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
