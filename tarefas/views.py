@@ -40,3 +40,10 @@ def deletar_tarefa(request, id):
     tarefa = get_object_or_404(Tarefa, id=id)
     tarefa.delete()
     return redirect('lista_tarefas')
+
+from rest_framework import viewsets
+from .serializers import TarefaSerializer
+
+class TarefaViewSet(viewsets.ModelViewSet):
+    queryset = Tarefa.objects.all()
+    serializer_class = TarefaSerializer

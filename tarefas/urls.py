@@ -7,3 +7,10 @@ urlpatterns = [
     path('editar/<int:id>/', views.editar_tarefa, name='editar_tarefa'),
     path('deletar/<int:id>/', views.deletar_tarefa, name='deletar_tarefa'),
 ]
+
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'api/tarefas', views.TarefaViewSet)
+
+urlpatterns += router.urls
